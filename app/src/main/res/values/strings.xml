@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Мое первое приложение - погода</string>
+    <string name="town">г. Чита</string>
+
+</resources>
