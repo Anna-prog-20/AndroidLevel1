@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
     private TextView date,time,temperature;
@@ -21,15 +22,17 @@ public class MainActivity extends AppCompatActivity {
         initViews();
 
         Date dateCurrent=new Date();
-        DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
+        DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy", Locale.getDefault());
         String dateText = dateFormat.format(dateCurrent);
 
-        DateFormat timeFormat = new SimpleDateFormat("HH:mm");
+        DateFormat timeFormat = new SimpleDateFormat("HH:mm", Locale.getDefault());
         String timeText = timeFormat.format(dateCurrent);
+
+        String temperatureText=getString(R.string.temperature,12);
 
         setDate(dateText);
         setTime(timeText);
-        setTemperature(String.format("%d \u2103",12));
+        setTemperature(temperatureText);
 
     }
 
