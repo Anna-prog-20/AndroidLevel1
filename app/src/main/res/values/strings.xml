@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">Мое первое приложение - погода</string>
+    <string name="date_current">текущая дата</string>
+    <string name="time_current">текущее время</string>
+    <string name="temperature">%d \u2103</string>
     <string name="town">г. Чита</string>
 
 </resources>
