@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/background_additional"
+    tools:context=".ActivitySettings"
+    tools:ignore="ExtraText">
+
+    <TextView
+        android:id="@+id/textSelectTown"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/settings"
+        android:textAlignment="viewStart"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/textTown"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:autofillHints="@string/town"
+        android:inputType="textAutoComplete"
+        android:labelFor="@id/textTown"
+        android:text="@string/town"
+        android:textAlignment="viewStart"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textSelectTown" />
+
+    <ListView
+        android:id="@+id/listTown"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:entries="@array/listTown"
+        app:layout_constraintBottom_toTopOf="@+id/select"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textTown"
+        app:layout_constraintVertical_bias="0.0" >
+
+    </ListView>
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/addSettings"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="16sp"
+        android:textStyle="italic" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <CheckBox
+                android:id="@+id/windSpeed"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="@string/windSpeed"
+                android:textStyle="italic" />
+
+            <CheckBox
+                android:id="@+id/pressure"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="@string/pressure"
+                android:textStyle="italic" />
+            </LinearLayout>
+
+        <RadioGroup
+            android:id="@+id/theme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/themeBlack"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/themeBlack"
+                android:textStyle="italic" />
+
+            <RadioButton
+                android:id="@+id/themeWhite"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/themeWhite"
+                android:textStyle="italic" />
+        </RadioGroup>
+    </LinearLayout>
+    <Button
+        android:id="@+id/select"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/buttonSelect"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_editor_absoluteX="2dp" />
+
+</androidx.appcompat.widget.LinearLayoutCompat>
