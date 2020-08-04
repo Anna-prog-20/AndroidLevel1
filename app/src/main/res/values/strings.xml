@@ -1,0 +1,36 @@
+<resources>
+    <string name="app_name">Погода</string>
+    <string name="date_current">текущая дата</string>
+    <string name="time_current">текущее время</string>
+    <string name="temperature">%d \u2103</string>
+    <string name="town">Чита</string>
+    <string-array name="listTown">
+        <item>Чита</item>
+        <item>Могоча</item>
+        <item>Краснокаменск</item>
+        <item>Москва</item>
+        <item>Челябинск</item>
+        <item>Москва</item>
+        <item>Киров</item>
+        <item>Екатеринбург</item>
+        <item>Новосибирск</item>
+        <item>Иркутск</item>
+        <item>Улан-Удэ</item>
+        <item>Хабаровск</item>
+        <item>Владивосток</item>
+        <item>Краснодар</item>
+        <item>Воронеж</item>
+    </string-array>
+    <string name="buttonSelect">Выбрать</string>
+    <string name="settings">Настройки</string>
+    <string name="windSpeed">Скорость ветра</string>
+    <string name="txtWindSpeed">%d м/с</string>
+    <string name="pressure">Атмосферное давление</string>
+    <string name="txtPressure">%d мм рт.ст.</string>
+    <string name="addSettings">Дополнительные настройки</string>
+    <string name="themeBlack">Темная</string>
+    <string name="themeWhite">Светлая</string>
+    <string name="theme">Темы приложения</string>
+    <string name="imageContentDescription">Солнечно</string>
+
+</resources>
