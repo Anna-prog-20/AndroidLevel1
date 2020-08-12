@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/background_additional"
+    tools:context=".ActivitySettings"
+    tools:ignore="ExtraText">
+
+    <TextView
+        android:id="@+id/textSelectTown"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/settings"
+        android:textAlignment="viewStart"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <CheckBox
+                android:id="@+id/windSpeed"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="@string/windSpeed"
+                android:textStyle="italic" />
+
+            <CheckBox
+                android:id="@+id/pressure"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="@string/pressure"
+                android:textStyle="italic" />
+        </LinearLayout>
+
+        <RadioGroup
+            android:id="@+id/theme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/themeBlack"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/themeBlack"
+                android:textStyle="italic" />
+
+            <RadioButton
+                android:id="@+id/themeWhite"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:checked="true"
+                android:text="@string/themeWhite"
+                android:textStyle="italic" />
+        </RadioGroup>
+
+</LinearLayout>
