@@ -73,11 +73,6 @@ public class FragmentWeather extends Fragment{
         outputData();
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-    }
-
     private void initViews(View view) {
         date=view.findViewById(R.id.dateCurrent);
         time=view.findViewById(R.id.timeCurrent);

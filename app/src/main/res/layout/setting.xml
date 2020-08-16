@@ -18,27 +18,22 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:background="@drawable/separator">
+            android:orientation="horizontal">
 
             <CheckBox
                 android:id="@+id/windSpeed"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
                 android:text="@string/windSpeed"
-                android:textStyle="italic" />
+                style="@style/check"/>
 
             <CheckBox
                 android:id="@+id/pressure"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
                 android:text="@string/pressure"
-                android:textStyle="italic" />
+                style="@style/check"/>
         </LinearLayout>
 
         <Switch
             android:id="@+id/themeSwitch"
-            android:layout_width="wrap_content"
+            style="@style/check"
             android:layout_height="wrap_content"
             android:text="@string/theme"
             tools:ignore="UseSwitchCompatOrMaterialXml">

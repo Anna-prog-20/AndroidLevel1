@@ -56,4 +56,5 @@
         "При поддержке GeekBrains"
     </string>
     <string name="action_settings">Настройки</string>
+    <string name="itemTown">Выбор города</string>
 </resources>

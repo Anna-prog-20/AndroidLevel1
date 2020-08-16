@@ -18,6 +18,27 @@
         <item name="android:textSize">@dimen/table</item>
     </style>
 
+    <style name="check">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:textStyle">italic</item>
+        <item name="android:enabled">false</item>
+    </style>
+
+    <style name="styleActivity1">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:background">@drawable/background_additional</item>
+    </style>
+
+    <style name="styleActivity2" parent="styleActivity1">
+        <item name="android:background">@drawable/background_horizontal</item>
+    </style>
+
+    <style name="styleActivity3" parent="styleActivity1">
+        <item name="android:background">@drawable/background</item>
+    </style>
+
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
