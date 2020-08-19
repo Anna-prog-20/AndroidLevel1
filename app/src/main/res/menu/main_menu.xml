@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/itemInfo"
+        android:icon="@android:drawable/ic_menu_info_details"
+        android:title="@string/itemInfo"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/itemInfoTown"
+        android:title="@string/itemInfoTown">
+    </item>
+    <item
+        android:id="@+id/itemSetting"
+        android:title="@string/itemSetting">
+    </item>
+</menu>
