@@ -1,27 +1,34 @@
 package com.example.androidlevel1_lesson1;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.CheckBox;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import static com.example.androidlevel1_lesson1.FragmentWeather.dataKey;
+
 public class ActivitySettings extends AppCompatActivity {
+    private CheckBox windSpeed,pressure;
+    private DataContainer currentData;;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTitle(R.string.itemSetting);
         setContentView(R.layout.activity_settings);
+        init();
     }
-
 
     @Override
     public void onSaveInstanceState(@Nullable Bundle saveInstanceState) {
         assert saveInstanceState != null;
+        saveInstanceState.putSerializable(dataKey,currentData);
         super.onSaveInstanceState(saveInstanceState);
     }
 
@@ -33,7 +40,16 @@ public class ActivitySettings extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(ActivitySettings.this, MainActivity.class);
+        Intent intent;
+        currentData.setCheckPressure(pressure.isChecked());
+        currentData.setCheckWindSpeed(windSpeed.isChecked());
+        if(getResources().getConfiguration().orientation== Configuration.ORIENTATION_LANDSCAPE){
+            intent=new Intent(this, MainActivity.class);
+        }
+        else {
+            intent = new Intent(this, ActivityWeather.class);
+        }
+        intent.putExtra(dataKey,currentData);
         startActivity(intent);
     }
 
@@ -67,5 +83,26 @@ public class ActivitySettings extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
             }
         }
+    }
+
+    private void init(){
+        windSpeed=findViewById(R.id.windSpeed);
+        pressure=findViewById(R.id.pressure);
+        currentData = getDataCurrent();
+        if(currentData!=null) {
+            check(currentData.isCheckWindSpeed(), windSpeed);
+            check(currentData.isCheckPressure(), pressure);
+        }
+    }
+
+    private void check(boolean b,CheckBox checkBox){
+        if(b)
+            checkBox.setChecked(true);
+        else
+            checkBox.setChecked(false);
+    }
+
+    public DataContainer getDataCurrent(){
+        return (DataContainer) this.getIntent().getSerializableExtra(dataKey);
     }
 }

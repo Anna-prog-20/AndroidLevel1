@@ -15,7 +15,6 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -33,7 +32,6 @@ import javax.net.ssl.HttpsURLConnection;
 public class FragmentTownList extends Fragment implements IRVOnItemClick{
     private boolean isExistWeather=false;
     private DataContainer currentData;
-    private String townKey="townKey";
     private RecyclerView town;
     private TextInputEditText townSelected;
     private ArrayList<String> arrayListTown;
@@ -58,11 +56,18 @@ public class FragmentTownList extends Fragment implements IRVOnItemClick{
         super.onActivityCreated(savedInstanceState);
         isExistWeather = getResources().getConfiguration().orientation
                 == Configuration.ORIENTATION_LANDSCAPE;
-        if (savedInstanceState != null)
-            currentData = (DataContainer) savedInstanceState.getSerializable(townKey);
+        if (getActivity().getIntent().getSerializableExtra(dataKey) != null) {
+            currentData = (DataContainer) getActivity().getIntent().getSerializableExtra(dataKey);
+            assert currentData != null;
+            townSelected.setText(currentData.getTown());
+        }
         else {
-            currentData = new DataContainer(getResources().getStringArray(R.array.listTown)[0]);
-            getCurrentData(getResources().getStringArray(R.array.listTown)[0]);
+            if(savedInstanceState!=null)
+                currentData=(DataContainer) savedInstanceState.getSerializable(dataKey);
+            else {
+                currentData = new DataContainer(getResources().getStringArray(R.array.listTown)[0]);
+                getCurrentData(getResources().getStringArray(R.array.listTown)[0]);
+            }
         }
        if (isExistWeather){
             showWeather(currentData);
@@ -71,7 +76,7 @@ public class FragmentTownList extends Fragment implements IRVOnItemClick{
 
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
-        outState.putSerializable(townKey,currentData);
+        outState.putSerializable(dataKey,currentData);
         super.onSaveInstanceState(outState);
     }
 
@@ -81,8 +86,12 @@ public class FragmentTownList extends Fragment implements IRVOnItemClick{
     }
 
     private DataContainer getCurrentData(String itemText){
-        currentData=new DataContainer(itemText);
-        return currentData;
+        DataContainer currentDataI=new DataContainer(itemText);
+        if (currentData!=null) {
+            currentDataI.setCheckPressure(currentData.isCheckPressure());
+            currentDataI.setCheckWindSpeed(currentData.isCheckWindSpeed());
+        }
+        return currentDataI;
     }
 
     private void onClick(final String itemText){
@@ -130,7 +139,6 @@ public class FragmentTownList extends Fragment implements IRVOnItemClick{
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (!hasFocus) {
-
                     TextView tv = (TextView) v;
                     FragmentTownList.this.validate(tv,getResources().getString(R.string.messageTown));
                 }

@@ -7,8 +7,26 @@ public class DataContainer implements Serializable {
     private int temperature;
     private int pressure;
     private int windSpeed;
+    private boolean checkPressure=true;
+    private boolean checkWindSpeed=true;
     private ArrayList<String> listTemperature;
     private String town;
+
+    public boolean isCheckPressure() {
+        return checkPressure;
+    }
+
+    public void setCheckPressure(boolean checkPressure) {
+        this.checkPressure = checkPressure;
+    }
+
+    public boolean isCheckWindSpeed() {
+        return checkWindSpeed;
+    }
+
+    public void setCheckWindSpeed(boolean checkWindSpeed) {
+        this.checkWindSpeed = checkWindSpeed;
+    }
 
     public DataContainer(String town) {
         this.town = town;

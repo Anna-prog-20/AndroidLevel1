@@ -12,12 +12,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity
-            android:name=".ActivityInfo"
-            android:label="@string/itemInfo"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".ActivitySettings"/>
-        <activity android:name=".ActivityWeather" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,6 +19,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ActivityWeather" />
+        <activity
+            android:name=".ActivityInfo"
+            android:label="@string/itemInfo"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".ActivitySettings"
+            android:noHistory="true"/>
+
     </application>
 
 </manifest>

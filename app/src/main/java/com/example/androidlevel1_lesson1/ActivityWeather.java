@@ -11,22 +11,54 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.Objects;
+
+import static com.example.androidlevel1_lesson1.FragmentWeather.dataKey;
+
 public class ActivityWeather extends AppCompatActivity {
     private String town;
+    private DataContainer currentData;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_weather);
         if(getResources().getConfiguration().orientation== Configuration.ORIENTATION_LANDSCAPE){
+            Intent intent = new Intent(this, MainActivity.class);
+            currentData=(DataContainer) Objects.requireNonNull(getIntent().getExtras()).getSerializable(dataKey);
+            intent.putExtra(dataKey,currentData);
+            startActivity(intent);
             finish();
             return;
         }
         if(savedInstanceState==null){
-            FragmentWeather details=new FragmentWeather();
+            FragmentWeather details = new FragmentWeather();
             details.setArguments(getIntent().getExtras());
             town= details.getDataCurrent().getTown();
         }
+    }
+
+    private boolean check(double d){
+        return d != 0;
+    }
+
+    @Override
+    protected void onPause() {
+        currentData=(DataContainer) Objects.requireNonNull(getIntent().getExtras()).getSerializable(dataKey);
+        super.onPause();
+    }
+
+    @Override
+    public void onSaveInstanceState(@Nullable Bundle saveInstanceState) {
+        assert saveInstanceState != null;
+        saveInstanceState.putSerializable(dataKey,currentData);
+        super.onSaveInstanceState(saveInstanceState);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(@Nullable Bundle savedInstanceState) {
+        assert savedInstanceState != null;
+        super.onRestoreInstanceState(savedInstanceState);
     }
 
     @Override
@@ -51,6 +83,8 @@ public class ActivityWeather extends AppCompatActivity {
             }
             case R.id.itemSetting: {
                 Intent intent = new Intent(this, ActivitySettings.class);
+                currentData=(DataContainer) Objects.requireNonNull(getIntent().getExtras()).getSerializable(dataKey);
+                intent.putExtra(dataKey,currentData);
                 startActivity(intent);
                 return true;
             }
@@ -58,5 +92,13 @@ public class ActivityWeather extends AppCompatActivity {
                 return false;
             }
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent=new Intent(this, MainActivity.class);
+        currentData=(DataContainer) Objects.requireNonNull(getIntent().getExtras()).getSerializable(dataKey);
+        intent.putExtra(dataKey,currentData);
+        startActivity(intent);
     }
 }

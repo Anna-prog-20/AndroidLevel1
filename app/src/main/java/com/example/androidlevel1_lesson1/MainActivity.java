@@ -13,34 +13,35 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.Objects;
+
+import static com.example.androidlevel1_lesson1.FragmentWeather.dataKey;
+
 
 public class MainActivity extends AppCompatActivity{
     private TextView town;
-    final static String townKey="townKey";
+    private DataContainer currentData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
         if(getResources().getConfiguration().orientation== Configuration.ORIENTATION_LANDSCAPE){
             setTitle(R.string.app_name);
         }else setTitle(R.string.itemTown);
-        setContentView(R.layout.activity_main);
         initViews();
-    }
-
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        int countOfFragmentInManager = getSupportFragmentManager().getBackStackEntryCount();
-        if(countOfFragmentInManager > 0) {
-            getSupportFragmentManager().popBackStack();
-        }
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main_menu, menu);
         return true;
+    }
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        if(getResources().getConfiguration().orientation!= Configuration.ORIENTATION_LANDSCAPE)
+            menu.findItem(R.id.itemSetting).setVisible(false);
+        return super.onPrepareOptionsMenu(menu);
     }
 
     @Override
@@ -59,6 +60,8 @@ public class MainActivity extends AppCompatActivity{
             }
             case R.id.itemSetting: {
                 Intent intent = new Intent(this, ActivitySettings.class);
+                currentData=(DataContainer) Objects.requireNonNull(getIntent().getExtras()).getSerializable(dataKey);
+                intent.putExtra(dataKey,currentData);
                 startActivity(intent);
                 return true;
             }
@@ -74,6 +77,19 @@ public class MainActivity extends AppCompatActivity{
         if(requestCode==88){
             recreate();
         }
+    }
+
+    @Override
+    public void onSaveInstanceState(@Nullable Bundle saveInstanceState) {
+        assert saveInstanceState != null;
+        saveInstanceState.putSerializable(dataKey,currentData);
+        super.onSaveInstanceState(saveInstanceState);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(@Nullable Bundle savedInstanceState) {
+        assert savedInstanceState != null;
+        super.onRestoreInstanceState(savedInstanceState);
     }
 
     private void initViews() {

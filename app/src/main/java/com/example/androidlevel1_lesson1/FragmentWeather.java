@@ -25,8 +25,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
-import static com.example.androidlevel1_lesson1.MainActivity.townKey;
-
 public class FragmentWeather extends Fragment{
     public static final String dataKey = "dataKey";
     private TextView date;
@@ -60,13 +58,26 @@ public class FragmentWeather extends Fragment{
 
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
-        outState.putSerializable(townKey,currentData);
+        currentData.setCheckWindSpeed(check(windSpeed));
+        currentData.setCheckPressure(check(pressure));
+        outState.putSerializable(dataKey,currentData);
         super.onSaveInstanceState(outState);
     }
 
     @Override
+    public void onPause() {
+        currentData.setCheckWindSpeed(check(windSpeed));
+        currentData.setCheckPressure(check(pressure));
+        super.onPause();
+    }
+
+    private boolean check(TextView textView){
+        return textView.getVisibility() == View.VISIBLE;
+    }
+
+    @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+       super.onCreate(savedInstanceState);
 
     }
 
@@ -78,7 +89,6 @@ public class FragmentWeather extends Fragment{
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
         initViews(view);
         outputData();
         try {
@@ -88,16 +98,28 @@ public class FragmentWeather extends Fragment{
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
+        super.onViewCreated(view, savedInstanceState);
     }
 
     private void initViews(View view) {
+        currentData = getDataCurrent();
         date=view.findViewById(R.id.dateCurrent);
         time=view.findViewById(R.id.timeCurrent);
         temperature=view.findViewById(R.id.temperatureCurrent);
         town=view.findViewById(R.id.townCurrent);
         windSpeed=view.findViewById(R.id.windSpeed);
-        pressure=view.findViewById(R.id.pressure);
+        pressure = view.findViewById(R.id.pressure);
         listWeather = view.findViewById(R.id.listWeather);
+        visible(windSpeed,currentData.isCheckWindSpeed());
+        visible(pressure,currentData.isCheckPressure());
+    }
+
+    private void visible(TextView textView,boolean b){
+        if (b) {
+            textView.setVisibility(View.VISIBLE);
+        }
+        else
+            textView.setVisibility(View.GONE);
     }
 
     private void setDate(String dateCurrent) {
@@ -129,7 +151,6 @@ public class FragmentWeather extends Fragment{
     }
 
     private void outputData(){
-        currentData = getDataCurrent();
         if (currentData!=null) {
             String txtTown = currentData.getTown();
             setTown(txtTown);
@@ -144,8 +165,10 @@ public class FragmentWeather extends Fragment{
         temperature.setText(temperatureValue);
         String pressureText = getString(R.string.txtPressure, weatherRequest.getList()[t].getMain().getPressure());
         pressure.setText(pressureText);
+        currentData.setPressure(weatherRequest.getList()[t].getMain().getPressure());
         String windSpeedStr = getString(R.string.txtWindSpeed, Math.round(weatherRequest.getList()[t].getWind().getSpeed()));
         windSpeed.setText(windSpeedStr);
+        currentData.setWindSpeed(Math.round(weatherRequest.getList()[t].getWind().getSpeed()));
         setArrayList(weatherRequest);
         setupRecyclerView();
     }
