@@ -108,11 +108,10 @@ public class FragmentTownList extends Fragment implements IRVOnItemClick{
 
     private void showWeather(DataContainer currentData){
         if(isExistWeather) {
-            assert getFragmentManager() != null;
-            FragmentWeather detail = (FragmentWeather) getFragmentManager().findFragmentById(R.id.fragmentMainWeather);
+            FragmentWeather detail = (FragmentWeather) getChildFragmentManager().findFragmentById(R.id.fragmentMainWeather);
             if (detail == null|| !detail.getDataCurrent().getTown().equals(currentData.getTown())) {
                 detail = FragmentWeather.create(currentData);
-                FragmentTransaction ft = getFragmentManager().beginTransaction();
+                FragmentTransaction ft = getChildFragmentManager().beginTransaction();
                 ft.replace(R.id.fragmentMainWeather, detail);
                 ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
                 ft.addToBackStack("Some_Key");
